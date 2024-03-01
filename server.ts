@@ -41,11 +41,15 @@ function ctype(type: string): string {
 }
 
 async function genResponseArgs(request: Request) {
-  const { pathname, searchParams } = new URL(request.url);
+  const { pathname, search, searchParams } = new URL(request.url);
   const path = pathname.replace(/^\//, "");
   if (IS_DEV) {
-    console.log({ path, params: searchParams.toString() });
+    console.log({ path, search, params: searchParams.toString() });
   }
+
+  const urlBase = IS_DEV
+    ? "http://localhost:8000"
+    : "https://bluesquare.deno.dev/";
 
   if (path === "") {
     const file = await Deno.readFile("./index.html");
@@ -56,8 +60,10 @@ async function genResponseArgs(request: Request) {
   }
 
   if (path !== "qr.png") {
+    const pageUrl = `${urlBase}${path}${search}`;
+
     searchParams.append("path", path);
-    const imgSrc = `qr.png?${searchParams.toString()}`;
+    const imgSrc = `${urlBase}qr.png?${searchParams.toString()}`;
 
     const og = (prop, content) =>
       tag("meta", { property: `og:${prop}`, content });
@@ -72,7 +78,7 @@ async function genResponseArgs(request: Request) {
         href: "https://cdn.jsdelivr.net/npm/water.css@2/out/water.min.css",
       }) +
       tag("title", `Bluesquare: ${path}`) +
-      og("url", "https://bluesquare.deno.dev") +
+      og("url", pageUrl) +
       og("type", "website") +
       og("title", "Bluesquare") +
       og("description", "QR code generator for Bluesky.") +
@@ -81,13 +87,17 @@ async function genResponseArgs(request: Request) {
       tag("style", "body { text-align: center; }") +
       tag("h1", tag("a", { href: "/" }, "Bluesquare")) +
       tag(
-        "a",
-        { href: `https://bsky.app/profile/${path}`, target: "_blank" },
-        tag("img", {
-          src: imgSrc,
-          onerror:
-            "this.parentNode.outerHTML='&lt;div&gt;Not Found&lt;/div&gt;'",
-        }),
+        "div",
+        tag("div", pageUrl),
+        tag(
+          "a",
+          { href: `https://bsky.app/profile/${path}`, target: "_blank" },
+          tag("img", {
+            src: imgSrc,
+            onerror:
+              "this.parentNode.parentNode.outerHTML='&lt;div&gt;Not Found&lt;/div&gt;'",
+          }),
+        ),
       );
 
     return [file, { headers: { ...ctype("text/html") } }];
