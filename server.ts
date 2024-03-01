@@ -120,7 +120,7 @@ async function genResponseArgs(request: Request) {
   }
 
   const bskyURL = `https://bsky.app/profile/${user.did}`;
-  const type = searchParams.get("type") || "cloud";
+  const type = searchParams.get("type") || "user";
 
   const base64Image = await qrcode(bskyURL);
 
