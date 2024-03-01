@@ -1,0 +1,51 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bluesquare</title>
+<meta property="og:url" content="https://bluesquare.deno.dev">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bluesquare">
+<meta property="og:description" content="QR code generator for Bluesky.">
+<meta property="og:site_name" content="Bluesquare">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/72x72/1f7e6.png">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.min.css">
+<link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/72x72/1f7e6.png">
+<style>
+body { text-align: center; }
+input { display: inline; }
+</style>
+
+<h1>Bluesquare</h1>
+
+<p>Access to the path /bsky-handle directory or input handle of Bluesky here ↓</p>
+<form id="form" target="htmz">
+  <div>
+    <input id="input-handle" required autofocus placeholder="xxx.bsky.social">
+    <input id="submit-button" type="submit" value="Generate QR">
+  </div>
+  <div>
+    <span>icon type</span>
+    <label><input type="radio" name="type" value="butterfly" checked>butterfly</label>
+    <label><input type="radio" name="type" value="cloudButterfly">cloud &amp; butterfly</label>
+    <label><input type="radio" name="type" value="cloud">cloud</label>
+    <label><input type="radio" name="type" value="user">user icon</label>
+    <label><input type="radio" name="type" value="none">none</label>
+  </div>
+</form>
+
+<p>You can use DID (like <code>did:plc:xxxx</code>) instead of handle.</p>
+
+<div id="output"></div>
+
+<iframe
+    id="htmz"
+    hidden
+    name="htmz"
+    onload="setTimeout(()=>document.getElementById('output')?.replaceChildren(contentDocument.body.lastChild ?? ''))">
+</iframe>
+
+<script>
+  document.getElementById('form').addEventListener('submit', (event) => {
+    document.getElementById("output").innerText = 'Calculating...'
+    event.target.action = document.getElementById("input-handle").value;
+  })
+</script>

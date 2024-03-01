@@ -1,0 +1,23 @@
+{
+  "imports": {
+    "qrcode": "https://deno.land/x/qrcode@v2.0.0/mod.ts",
+    "canvas": "https://deno.land/x/canvas@v1.4.1/mod.ts",
+    "markup_tag": "https://deno.land/x/markup_tag@0.4.0/mod.ts"
+  },
+  "tasks": {
+    // runner
+    "dev": "deno run --allow-read=./index.html --allow-env=DENO_DEPLOYMENT_ID --allow-net=0.0.0.0,cdn.jsdelivr.net,bsky.social,raw.githubusercontent.com,cdn.bsky.app --watch server.ts",
+    // development
+    "test": "deno test --allow-env=DENO_DEPLOYMENT_ID --allow-none",
+    "cov": "deno task test --coverage=cov_profile; deno coverage cov_profile",
+    "lint": "deno lint --ignore=cov_profile",
+    "fmt": "deno fmt --ignore=cov_profile",
+    "ci": "deno task lint && deno task fmt --check && deno task test",
+    "deps": "deno run --allow-read --allow-write --allow-net --allow-run https://deno.land/x/udd@0.8.2/main.ts --test='deno task test' deno.jsonc",
+    // git hooks
+    "setup-hooks": "deno run --allow-read --allow-run https://pax.deno.dev/kawarimidoll/deno-dev-template@2.0.1/scripts/setup-hooks.ts",
+    "commit-msg": "npx commitlint -x @commitlint/config-conventional -e \"$1\"",
+    "pre-commit": "deno run --allow-read --allow-env --allow-run --allow-write https://pax.deno.dev/kawarimidoll/deno-dev-template@2.0.1/scripts/lint-staged.ts",
+    "pre-push": "deno task ci"
+  }
+}
