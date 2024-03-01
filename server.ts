@@ -127,8 +127,14 @@ async function genResponseArgs(request: Request) {
   const size = 600;
   const canvas = createCanvas(size, size);
   const ctx = canvas.getContext("2d");
+  ctx.beginPath();
+  ctx.fillStyle = "#FFF";
+  ctx.fillRect(0, 0, size, size);
+  ctx.closePath();
   const img = await loadImage(base64Image);
-  ctx.drawImage(img, 0, 0, size, size);
+  const margin = size / 15;
+
+  ctx.drawImage(img, margin, margin, size - margin * 2, size - margin * 2);
 
   const iconBase =
     "https://raw.githubusercontent.com/bluesky-social/social-app/";
