@@ -27,7 +27,7 @@ async function resolveHandle(handleOrDid: string): Record<string, string> {
     const { uri, value } = json.records[0];
     const did = uri.replace("at://", "").replace(/\/.*/, "");
     console.log({ did, value });
-    const avatar = value.avatar.ref["$link"];
+    const avatar = value.avatar.cid ?? value.avatar.ref["$link"];
 
     return { did, avatar };
   } catch (e) {
@@ -48,7 +48,7 @@ async function genResponseArgs(request: Request) {
   }
 
   const urlBase = IS_DEV
-    ? "http://localhost:8000"
+    ? "http://localhost:8000/"
     : "https://bluesquare.deno.dev/";
 
   if (path === "") {
