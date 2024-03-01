@@ -21,12 +21,19 @@ async function resolveHandle(handleOrDid: string): Record<string, string> {
   url.search = new URLSearchParams({ collection, repo });
   const endpoint = url.toString();
 
+  if (IS_DEV) {
+    console.log(endpoint);
+  }
+
   try {
     const response = await fetch(endpoint);
     const json = await response.json();
     const { uri, value } = json.records[0];
     const did = uri.replace("at://", "").replace(/\/.*/, "");
-    console.log({ did, value });
+
+    if (IS_DEV) {
+      console.log({ did, value });
+    }
     const avatar = value.avatar.cid ?? value.avatar.ref["$link"];
 
     return { did, avatar };
