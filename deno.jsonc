@@ -13,7 +13,7 @@
     "lint": "deno lint --ignore=cov_profile",
     "fmt": "deno fmt --ignore=cov_profile",
     "ci": "deno task lint && deno task fmt --check && deno task test",
-    "deps": "deno run --allow-read --allow-write --allow-net --allow-run https://deno.land/x/udd@0.8.2/main.ts --test='deno task test' deno.jsonc",
+    "update": "deno run --allow-env --allow-read --allow-write=. --allow-run=git,deno --allow-net=jsr.io,deno.land jsr:@molt/cli deno.jsonc",
     // git hooks
     "setup-hooks": "deno run --allow-read --allow-run https://pax.deno.dev/kawarimidoll/deno-dev-template@2.0.1/scripts/setup-hooks.ts",
     "commit-msg": "npx commitlint -x @commitlint/config-conventional -e \"$1\"",
