@@ -1,4 +1,4 @@
-import { qrcode } from "qrcode";
+import QRCode from "qrcode";
 import { createCanvas, loadImage } from "canvas";
 import { tag } from "markup_tag";
 
@@ -122,7 +122,7 @@ async function genResponseArgs(request: Request) {
   const bskyURL = `https://bsky.app/profile/${user.did}`;
   const type = searchParams.get("type") || "user";
 
-  const base64Image = await qrcode(bskyURL);
+  const base64Image = await QRCode.toDataURL(bskyURL);
 
   const size = 600;
   const canvas = createCanvas(size, size);

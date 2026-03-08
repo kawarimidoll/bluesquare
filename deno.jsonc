@@ -1,8 +1,8 @@
 {
   "imports": {
-    "qrcode": "https://deno.land/x/qrcode@v2.0.0/mod.ts",
-    "canvas": "https://deno.land/x/canvas@v1.4.1/mod.ts",
-    "markup_tag": "https://deno.land/x/markup_tag@0.4.0/mod.ts"
+    "qrcode": "npm:qrcode@^1.5.0",
+    "canvas": "jsr:@gfx/canvas-wasm@^0.4.2",
+    "markup_tag": "jsr:@kawarimidoll/markup-tag@^1.0.0"
   },
   "tasks": {
     // runner
