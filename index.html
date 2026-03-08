@@ -6,17 +6,33 @@
 <meta property="og:title" content="Bluesquare">
 <meta property="og:description" content="QR code generator for Bluesky.">
 <meta property="og:site_name" content="Bluesquare">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/72x72/1f7e6.png">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.min.css">
-<link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/72x72/1f7e6.png">
+<meta
+  property="og:image"
+  content="https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/72x72/1f7e6.png"
+>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.min.css"
+>
+<link
+  rel="icon"
+  type="image/png"
+  href="https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/72x72/1f7e6.png"
+>
 <style>
-body { text-align: center; }
-input { display: inline; }
+  body {
+    text-align: center;
+  }
+  input {
+    display: inline;
+  }
 </style>
 
 <h1>Bluesquare</h1>
 
-<p>Access to the path /bsky-handle directory or input handle of Bluesky here ↓</p>
+<p>
+  Access to the path /bsky-handle directory or input handle of Bluesky here ↓
+</p>
 <form id="form" target="htmz">
   <div>
     <input id="input-handle" required autofocus placeholder="xxx.bsky.social">
@@ -24,9 +40,11 @@ input { display: inline; }
   </div>
   <div>
     <span>icon type</span>
-    <label><input type="radio" name="type" value="user" checked>user icon</label>
+    <label><input type="radio" name="type" value="user" checked>user
+      icon</label>
     <label><input type="radio" name="type" value="butterfly">butterfly</label>
-    <label><input type="radio" name="type" value="cloudButterfly">cloud &amp; butterfly</label>
+    <label><input type="radio" name="type" value="cloudButterfly">cloud &amp;
+      butterfly</label>
     <label><input type="radio" name="type" value="cloud">cloud</label>
     <label><input type="radio" name="type" value="none">none</label>
   </div>
@@ -37,25 +55,27 @@ input { display: inline; }
 <div id="output"></div>
 
 <p>
-<a
+  <a
     title="https://github.com/kawarimidoll/bluesquare"
     target="_blank"
     rel="noopener noreferrer nofollow"
-    href="https://github.com/kawarimidoll/bluesquare">
-  https://github.com/kawarimidoll/bluesquare
-</a>
+    href="https://github.com/kawarimidoll/bluesquare"
+  >
+    https://github.com/kawarimidoll/bluesquare
+  </a>
 </p>
 
 <iframe
-    id="htmz"
-    hidden
-    name="htmz"
-    onload="setTimeout(()=>document.getElementById('output')?.replaceChildren(contentDocument.body.lastChild ?? ''))">
+  id="htmz"
+  hidden
+  name="htmz"
+  onload="setTimeout(()=>document.getElementById('output')?.replaceChildren(contentDocument.body.lastChild ?? ''))"
+>
 </iframe>
 
 <script>
-  document.getElementById('form').addEventListener('submit', (event) => {
-    document.getElementById("output").innerText = 'Calculating...'
+  document.getElementById("form").addEventListener("submit", (event) => {
+    document.getElementById("output").innerText = "Calculating...";
     event.target.action = document.getElementById("input-handle").value;
-  })
+  });
 </script>
