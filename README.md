@@ -6,7 +6,7 @@ https://bluesquare.deno.dev/
 
 ## Development
 
-This works with [Deno](https://deno.land).
+This works with [Deno](https://deno.com).
 
 To run this locally, clone this repository and run `deno task dev` to start
 server.
