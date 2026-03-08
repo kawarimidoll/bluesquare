@@ -12,13 +12,15 @@ function errResponse(
   return [`${status}: ${statusText}`, { status, statusText, ...init }];
 }
 
-async function resolveHandle(handleOrDid: string): Record<string, string> {
+async function resolveHandle(
+  handleOrDid: string,
+): Promise<Record<string, string>> {
   const pathname = "/xrpc/com.atproto.repo.listRecords";
   const base = "https://bsky.social";
   const collection = "app.bsky.actor.profile";
   const repo = decodeURIComponent(handleOrDid);
   const url = new URL(pathname, base);
-  url.search = new URLSearchParams({ collection, repo });
+  url.search = new URLSearchParams({ collection, repo }).toString();
   const endpoint = url.toString();
 
   if (IS_DEV) {
@@ -43,11 +45,13 @@ async function resolveHandle(handleOrDid: string): Record<string, string> {
   }
 }
 
-function ctype(type: string): string {
+function ctype(type: string): Record<string, string> {
   return { "content-type": `${type}; charset=utf-8` };
 }
 
-async function genResponseArgs(request: Request) {
+async function genResponseArgs(
+  request: Request,
+): Promise<[BodyInit, ResponseInit]> {
   const { pathname, search, searchParams } = new URL(request.url);
   const path = pathname.replace(/^\//, "");
   if (IS_DEV) {
@@ -72,7 +76,7 @@ async function genResponseArgs(request: Request) {
     searchParams.append("path", path);
     const imgSrc = `${urlBase}qr.png?${searchParams.toString()}`;
 
-    const og = (prop, content) =>
+    const og = (prop: string, content: string) =>
       tag("meta", { property: `og:${prop}`, content });
 
     const file = tag("meta", { charset: "utf-8" }) +
@@ -113,7 +117,7 @@ async function genResponseArgs(request: Request) {
   // qr.png
 
   const user = await resolveHandle(
-    path === "qr.png" ? searchParams.get("path") : path,
+    path === "qr.png" ? (searchParams.get("path") ?? "") : path,
   );
   if (!user.did) {
     return errResponse(404, "Not Found");
@@ -147,7 +151,7 @@ async function genResponseArgs(request: Request) {
     user:
       `https://cdn.bsky.app/img/avatar/plain/${user.did}/${user.avatar}@jpeg`,
   };
-  const iconUrl = icons[type];
+  const iconUrl = icons[type as keyof typeof icons];
 
   if (iconUrl) {
     const icon = await loadImage(iconUrl);
@@ -193,7 +197,9 @@ async function genResponseArgs(request: Request) {
     ctx.restore();
   }
 
-  return [canvas.toBuffer(), { headers: { ...ctype("image/png") } }];
+  return [new Blob([new Uint8Array(canvas.toBuffer())]), {
+    headers: { ...ctype("image/png") },
+  }];
 }
 
 Deno.serve(async (request: Request) =>
