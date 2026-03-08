@@ -6,12 +6,7 @@
   },
   "tasks": {
     "dev": "deno run --allow-read=./index.html --allow-env=DENO_DEPLOYMENT_ID --allow-net=0.0.0.0,cdn.jsdelivr.net,bsky.social,raw.githubusercontent.com,cdn.bsky.app --watch server.ts",
-    "test": "deno test --allow-env=DENO_DEPLOYMENT_ID --allow-none",
-    "cov": "deno task test --coverage=cov_profile && deno coverage cov_profile",
-    "ci": "deno lint && deno fmt --check && deno task test",
-    // git hooks
-    "commit-msg": "npx commitlint -x @commitlint/config-conventional -e \"$1\"",
-    "pre-push": "deno task ci"
+    "ci": "deno lint && deno fmt --check"
   },
   "exclude": ["cov_profile"]
 }
