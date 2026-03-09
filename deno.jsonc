@@ -1,8 +1,8 @@
 {
   "imports": {
-    "qrcode": "npm:qrcode@^1.5.0",
+    "qrcode": "npm:qrcode@^1.5.4",
     "canvas": "jsr:@gfx/canvas-wasm@^0.4.2",
-    "markup_tag": "jsr:@kawarimidoll/markup-tag@^1.0.0"
+    "markup_tag": "jsr:@kawarimidoll/markup-tag@^1.0.1"
   },
   "tasks": {
     "dev": "deno run --allow-read=./index.html --allow-env=DENO_DEPLOYMENT_ID --allow-net=0.0.0.0,cdn.jsdelivr.net,bsky.social,raw.githubusercontent.com,cdn.bsky.app --watch server.ts",

@@ -2,9 +2,9 @@
   "version": "5",
   "specifiers": {
     "jsr:@gfx/canvas-wasm@~0.4.2": "0.4.2",
-    "jsr:@kawarimidoll/markup-tag@1": "1.0.1",
+    "jsr:@kawarimidoll/markup-tag@^1.0.1": "1.0.1",
     "jsr:@std/encoding@1.0.5": "1.0.5",
-    "npm:qrcode@^1.5.0": "1.5.4"
+    "npm:qrcode@^1.5.4": "1.5.4"
   },
   "jsr": {
     "@gfx/canvas-wasm@0.4.2": {
@@ -172,8 +172,8 @@
   "workspace": {
     "dependencies": [
       "jsr:@gfx/canvas-wasm@~0.4.2",
-      "jsr:@kawarimidoll/markup-tag@1",
-      "npm:qrcode@^1.5.0"
+      "jsr:@kawarimidoll/markup-tag@^1.0.1",
+      "npm:qrcode@^1.5.4"
     ]
   }
 }
