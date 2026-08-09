@@ -20,12 +20,12 @@
   href="https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/72x72/1f7e6.png"
 >
 <style>
-  body {
-    text-align: center;
-  }
-  input {
-    display: inline;
-  }
+body {
+  text-align: center;
+}
+input {
+  display: inline;
+}
 </style>
 
 <h1>Bluesquare</h1>
@@ -70,12 +70,11 @@
   hidden
   name="htmz"
   onload="setTimeout(()=>document.getElementById('output')?.replaceChildren(contentDocument.body.lastChild ?? ''))"
->
-</iframe>
+></iframe>
 
 <script>
-  document.getElementById("form").addEventListener("submit", (event) => {
-    document.getElementById("output").innerText = "Calculating...";
-    event.target.action = document.getElementById("input-handle").value;
-  });
+document.getElementById("form").addEventListener("submit", (event) => {
+  document.getElementById("output").innerText = "Calculating...";
+  event.target.action = document.getElementById("input-handle").value;
+});
 </script>
